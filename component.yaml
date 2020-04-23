@@ -1,0 +1,27 @@
+name: CPU GPU
+description: CPU GPU which takes 2 arguments
+
+inputs:
+  - name: first
+    description: The first argument
+    type: String
+
+  - name: second
+    description: The second argument
+    type: String
+
+outputs:
+  - name: text
+    description: 'CPU/GPU output'
+    type: String
+
+implementation:
+  container:
+    image: gcr.io/bagheera-273005/achilles_cpu_gpu:latest
+    command: [python3, /pipelines/component/src/cpu_gpu.py]
+    args: [
+      --first, {inputValue:  first},
+      --second, {inputValue: second},
+    ]
+    fileOutputs:
+      text: /cpu_gpu_output.txt
